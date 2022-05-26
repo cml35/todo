@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes ,Route } from 'react-router-dom';
+import React, {Fragment} from 'react'
+import Todo from './pages/Todo'
 
 function App() {
+  const items = [
+    {
+      title: "First entry",
+      content: "Today was a good day"
+    },
+    {
+      title: "Second entry",
+      content: "Today was a great day"
+    }
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Routes>
+        <Route path="/" element={<Todo items={items}/>} />
+      </Routes>
+  </Fragment>
   );
 }
 
