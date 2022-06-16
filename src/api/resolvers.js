@@ -12,7 +12,7 @@ const todos = [
     content: "Today was a good day"
   },
   {
-    id: "2",
+    id: "2", 
     title: "Second entry",
     content: "Today was a great day"
   }
@@ -24,7 +24,6 @@ module.exports = {
   },
   Mutation: {
     createToDo(input) {
-      console.log("input", input);
       return upsertToDoItem(input);
     }
   }

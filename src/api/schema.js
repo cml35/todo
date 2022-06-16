@@ -10,18 +10,18 @@ const typeDefs = gql`
     content: String
   }
 
+  input TodoInput {
+    id: String!
+    title: String!
+    content: String!
+  }
+
   type Query {
     todos: [Todo]
   }
 
-  input ToDoInput {
-    id: String
-    title: String
-    content: String
-  }
-
   type Mutation {
-    createToDo(input: ToDoInput): Todo
+    createToDo(input: TodoInput!): Todo!
   }
 `;
 module.exports = typeDefs

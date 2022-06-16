@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { gql } from "@apollo/client";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -8,7 +9,17 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import TodoList from "../components/TodoList";
 import { getTodoItemsQuery } from "../queries/todo";
-import { NEW_TODO } from "../mutations/todo";
+//import { NEW_TODO } from "../mutations/todo";
+
+export const NEW_TODO = gql`
+  mutation CreateToDo($input: TodoInput!) {
+    createToDo(input: $input) {
+      id
+      title
+      content
+    }
+  }
+`;
 
 const style = {
   position: 'absolute',
@@ -17,7 +28,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '2px solid #000', 
   boxShadow: 24,
   p: 4,
 };
@@ -25,7 +36,7 @@ const style = {
 const Todo = () => {
   const [modal, setModal] = useState(false);
   const { data } = useQuery(getTodoItemsQuery, { fetchPolicy: "cache-and-network" });
-  const [createToDo, newToDo] = useMutation(NEW_TODO);
+  const [createToDo, { data, loading, error }] = useMutation(NEW_TODO);
 
   if (!data) {
     return [];
